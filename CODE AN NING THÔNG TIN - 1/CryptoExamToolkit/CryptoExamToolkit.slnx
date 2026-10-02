@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="CryptoExam.Console/CryptoExam.Console.csproj" />
+  <Project Path="CryptoExam.Core/CryptoExam.Core.csproj" />
+</Solution>

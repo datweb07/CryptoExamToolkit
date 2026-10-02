@@ -1,0 +1,11 @@
+D:\CODE AN NING THÔNG TIN - Antigravity - Claude Sonnet\CryptoExamToolkit\CryptoExam.Core\bin\Debug\net8.0\CryptoExam.Core.deps.json
+D:\CODE AN NING THÔNG TIN - Antigravity - Claude Sonnet\CryptoExamToolkit\CryptoExam.Core\bin\Debug\net8.0\CryptoExam.Core.dll
+D:\CODE AN NING THÔNG TIN - Antigravity - Claude Sonnet\CryptoExamToolkit\CryptoExam.Core\bin\Debug\net8.0\CryptoExam.Core.pdb
+D:\CODE AN NING THÔNG TIN - Antigravity - Claude Sonnet\CryptoExamToolkit\CryptoExam.Core\obj\Debug\net8.0\CryptoExam.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\CODE AN NING THÔNG TIN - Antigravity - Claude Sonnet\CryptoExamToolkit\CryptoExam.Core\obj\Debug\net8.0\CryptoExam.Core.AssemblyInfoInputs.cache
+D:\CODE AN NING THÔNG TIN - Antigravity - Claude Sonnet\CryptoExamToolkit\CryptoExam.Core\obj\Debug\net8.0\CryptoExam.Core.AssemblyInfo.cs
+D:\CODE AN NING THÔNG TIN - Antigravity - Claude Sonnet\CryptoExamToolkit\CryptoExam.Core\obj\Debug\net8.0\CryptoExam.Core.csproj.CoreCompileInputs.cache
+D:\CODE AN NING THÔNG TIN - Antigravity - Claude Sonnet\CryptoExamToolkit\CryptoExam.Core\obj\Debug\net8.0\CryptoExam.Core.dll
+D:\CODE AN NING THÔNG TIN - Antigravity - Claude Sonnet\CryptoExamToolkit\CryptoExam.Core\obj\Debug\net8.0\refint\CryptoExam.Core.dll
+D:\CODE AN NING THÔNG TIN - Antigravity - Claude Sonnet\CryptoExamToolkit\CryptoExam.Core\obj\Debug\net8.0\CryptoExam.Core.pdb
+D:\CODE AN NING THÔNG TIN - Antigravity - Claude Sonnet\CryptoExamToolkit\CryptoExam.Core\obj\Debug\net8.0\ref\CryptoExam.Core.dll
