@@ -22,8 +22,9 @@ public sealed class ExamUtilitiesMenu
             Console.WriteLine("7. Máy tính số nhanh / modulo");
             Console.WriteLine("8. Bảng mã ký tự");
             Console.WriteLine("9. Tạo bảng chữ cái thay thế đơn");
+            Console.WriteLine("10. Chuyển đổi nhị phân / thập phân / bát phân / thập lục phân");
             Console.WriteLine("0. Quay lại");
-            var choice = ConsoleInput.Integer("Chọn: ", 0, 9);
+            var choice = ConsoleInput.Integer("Chọn: ", 0, 10);
             if (choice == 0) return;
             ConsoleOutput.Guard(() => Execute(choice));
         }
@@ -42,7 +43,29 @@ public sealed class ExamUtilitiesMenu
             case 7: QuickCalcMenu(); break;
             case 8: CharCodeTable(); break;
             case 9: MonoAlphaGen(); break;
+            case 10: NumberBaseMenu(); break;
         }
+    }
+
+    private static void NumberBaseMenu()
+    {
+        ConsoleOutput.Header("CHUYỂN ĐỔI CƠ SỐ");
+        Console.WriteLine("1. Nhị phân (cơ số 2)");
+        Console.WriteLine("2. Thập phân (cơ số 10)");
+        Console.WriteLine("3. Bát phân (cơ số 8)");
+        Console.WriteLine("4. Thập lục phân (cơ số 16)");
+        var from = ConsoleInput.Integer("Cơ số đầu vào: ", 1, 4);
+        var number = ConsoleInput.Text("Nhập số: ");
+        var to = ConsoleInput.Integer("Chuyển sang cơ số: ", 1, 4);
+        var bases = new[] { 2, 10, 8, 16 };
+        var baseNames = new[] { "Nhị phân", "Thập phân", "Bát phân", "Thập lục phân" };
+        var value = NumberBaseConverter.Parse(number, bases[from - 1]);
+        ConsoleOutput.Result($"Kết quả {baseNames[to - 1]}", NumberBaseConverter.Format(value, bases[to - 1]));
+        Console.WriteLine();
+        Console.WriteLine($"Nhị phân       : {NumberBaseConverter.Format(value, 2)}");
+        Console.WriteLine($"Thập phân      : {NumberBaseConverter.Format(value, 10)}");
+        Console.WriteLine($"Bát phân       : {NumberBaseConverter.Format(value, 8)}");
+        Console.WriteLine($"Thập lục phân  : {NumberBaseConverter.Format(value, 16)}");
     }
 
     // ============================================================
