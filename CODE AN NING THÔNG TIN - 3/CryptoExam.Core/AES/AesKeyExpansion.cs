@@ -4,7 +4,7 @@ public static class AesKeyExpansion
 {
     public static IReadOnlyList<byte[]> Expand128(byte[] key)
     {
-        if (key.Length != 16) throw new ArgumentException("Educational trace yêu cầu key AES-128 (16 byte).", nameof(key));
+        if (key.Length != 16) throw new ArgumentException("Dấu vết học thuật yêu cầu khóa AES-128 (16 byte).", nameof(key));
         var expanded = new byte[176];
         key.CopyTo(expanded, 0);
         var generated = 16;

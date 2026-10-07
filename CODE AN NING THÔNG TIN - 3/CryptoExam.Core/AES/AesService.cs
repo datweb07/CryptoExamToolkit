@@ -37,7 +37,7 @@ public static class AesService
     {
         var input = HexUtils.ToBytes(HexUtils.Normalize(blockHex, 32));
         var key = HexUtils.ToBytes(keyHex);
-        if (key.Length is not (16 or 24 or 32)) throw new ArgumentException("AES key phải dài 128/192/256 bit.");
+        if (key.Length is not (16 or 24 or 32)) throw new ArgumentException("Khóa AES phải có độ dài 128/192/256 bit.");
         using var aes = Aes.Create();
         aes.Mode = CipherMode.ECB;
         aes.Padding = PaddingMode.None;

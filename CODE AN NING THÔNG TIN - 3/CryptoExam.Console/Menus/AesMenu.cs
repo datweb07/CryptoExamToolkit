@@ -10,11 +10,11 @@ public sealed class AesMenu
         while (true)
         {
             ConsoleOutput.Header("AES");
-            Console.WriteLine("1. Quick Encrypt (AES-128/192/256, ECB single block)");
-            Console.WriteLine("2. Quick Decrypt (AES-128/192/256, ECB single block)");
-            Console.WriteLine("3. Educational AES-128 Trace - Show All");
-            Console.WriteLine("4. Educational AES-128 Quick Query");
-            Console.WriteLine("0. Back");
+            Console.WriteLine("1. Mã hóa nhanh (AES-128/192/256, ECB, một khối)");
+            Console.WriteLine("2. Giải mã nhanh (AES-128/192/256, ECB, một khối)");
+            Console.WriteLine("3. Dấu vết AES-128 học thuật - Hiển thị toàn bộ");
+            Console.WriteLine("4. Tra cứu nhanh AES-128 học thuật");
+            Console.WriteLine("0. Quay lại");
             var choice = ConsoleInput.Integer("Chọn: ", 0, 4);
             if (choice == 0) return;
             ConsoleOutput.Guard(() => Execute(choice));
@@ -23,10 +23,10 @@ public sealed class AesMenu
 
     private static void Execute(int choice)
     {
-        var block = ConsoleInput.Hex(choice == 2 ? "Ciphertext (32 hex): " : "Plaintext (32 hex): ", 32);
-        var key = ConsoleInput.Hex(choice <= 2 ? "Key (32/48/64 hex): " : "AES-128 key (32 hex): ");
-        if (choice == 1) ConsoleOutput.Result("Ciphertext", AesService.QuickEncrypt(block, key));
-        else if (choice == 2) ConsoleOutput.Result("Plaintext", AesService.QuickDecrypt(block, key));
+        var block = ConsoleInput.Hex(choice == 2 ? "Bản mã (32 ký tự hex): " : "Bản rõ (32 ký tự hex): ", 32);
+        var key = ConsoleInput.Hex(choice <= 2 ? "Khóa (32/48/64 ký tự hex): " : "Khóa AES-128 (32 ký tự hex): ");
+        if (choice == 1) ConsoleOutput.Result("Bản mã", AesService.QuickEncrypt(block, key));
+        else if (choice == 2) ConsoleOutput.Result("Bản rõ", AesService.QuickDecrypt(block, key));
         else
         {
             var trace = AesService.TraceEncrypt128(block, key);
@@ -35,24 +35,24 @@ public sealed class AesMenu
                 foreach (var round in trace.Rounds)
                 {
                     Console.WriteLine($"\nROUND {round.Round}");
-                    ConsoleOutput.Result("RoundKey", round.RoundKeyHex);
-                    if (round.SubBytesHex is not null) ConsoleOutput.Result("After SubBytes", round.SubBytesHex);
-                    if (round.ShiftRowsHex is not null) ConsoleOutput.Result("After ShiftRows", round.ShiftRowsHex);
-                    if (round.MixColumnsHex is not null) ConsoleOutput.Result("After MixColumns", round.MixColumnsHex);
-                    ConsoleOutput.Result("After AddRoundKey", round.AddRoundKeyHex);
+                    ConsoleOutput.Result("Khóa vòng", round.RoundKeyHex);
+                    if (round.SubBytesHex is not null) ConsoleOutput.Result("Sau SubBytes", round.SubBytesHex);
+                    if (round.ShiftRowsHex is not null) ConsoleOutput.Result("Sau ShiftRows", round.ShiftRowsHex);
+                    if (round.MixColumnsHex is not null) ConsoleOutput.Result("Sau MixColumns", round.MixColumnsHex);
+                    ConsoleOutput.Result("Sau AddRoundKey", round.AddRoundKeyHex);
                 }
-                ConsoleOutput.Result("Ciphertext", trace.CiphertextHex);
+                ConsoleOutput.Result("Bản mã", trace.CiphertextHex);
             }
             else
             {
-                Console.WriteLine("1.RoundKey 2.After SubBytes 3.After ShiftRows 4.After MixColumns 5.After AddRoundKey 6.Final Ciphertext");
-                var query = ConsoleInput.Integer("Need: ", 1, 6);
-                if (query == 6) { ConsoleOutput.Result("Ciphertext", trace.CiphertextHex); return; }
+                Console.WriteLine("1. Khóa vòng 2. Sau SubBytes 3. Sau ShiftRows 4. Sau MixColumns 5. Sau AddRoundKey 6. Bản mã cuối");
+                var query = ConsoleInput.Integer("Cần lấy: ", 1, 6);
+                if (query == 6) { ConsoleOutput.Result("Bản mã", trace.CiphertextHex); return; }
                 var minRound = query is 1 or 5 ? 0 : 1;
-                var roundNumber = ConsoleInput.Integer("Round i = ", minRound, 10);
+                var roundNumber = ConsoleInput.Integer("Vòng i = ", minRound, 10);
                 var round = trace.Rounds[roundNumber];
                 var value = query switch { 1 => round.RoundKeyHex, 2 => round.SubBytesHex, 3 => round.ShiftRowsHex, 4 => round.MixColumnsHex, _ => round.AddRoundKeyHex };
-                ConsoleOutput.Result($"Round {roundNumber} result", value ?? "N/A (round 10 has no MixColumns)");
+                ConsoleOutput.Result($"Kết quả vòng {roundNumber}", value ?? "Không áp dụng (vòng 10 không có MixColumns)");
             }
         }
     }

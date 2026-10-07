@@ -8,7 +8,7 @@ public sealed class ColumnarTranspositionCipher
     public ColumnarTranspositionCipher(string key)
     {
         Key = new string(key.ToUpperInvariant().Where(char.IsLetterOrDigit).ToArray());
-        if (Key.Length < 2) throw new ArgumentException("Keyword phải có ít nhất 2 ký tự.");
+        if (Key.Length < 2) throw new ArgumentException("Từ khóa phải có ít nhất 2 ký tự.");
         // ThenBy index đảm bảo ký tự khóa lặp được xếp ổn định từ trái sang phải.
         ColumnOrder = Key.Select((c, i) => (Character: c, Index: i)).OrderBy(x => x.Character).ThenBy(x => x.Index).Select(x => x.Index).ToArray();
     }

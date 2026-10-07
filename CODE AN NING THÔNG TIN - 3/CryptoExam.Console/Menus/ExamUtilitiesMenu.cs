@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using CryptoExam.Core.Common;
 using CryptoExam.Core.NumberTheory;
 using CryptoExam.Core.RSA;
@@ -12,18 +12,18 @@ public sealed class ExamUtilitiesMenu
     {
         while (true)
         {
-            ConsoleOutput.Header("EXAM UTILITIES / CONVERSION & CALCULATORS");
-            Console.WriteLine("1. A=0..Z=25 Conversion");
-            Console.WriteLine("2. ASCII Conversion");
-            Console.WriteLine("3. Digit 0-9 <-> A-J Conversion");
-            Console.WriteLine("4. Text Normalization for Classical Cipher");
-            Console.WriteLine("5. RSA Digital Signature from Text");
-            Console.WriteLine("6. Exam Formula Calculator");
-            Console.WriteLine("7. Number / Modulo Quick Calculators");
-            Console.WriteLine("8. Character Code Table (full view)");
-            Console.WriteLine("9. Monoalphabetic Alphabet Generator");
-            Console.WriteLine("0. Back");
-            var choice = ConsoleInput.Integer("Chon: ", 0, 9);
+            ConsoleOutput.Header("TIỆN ÍCH THI");
+            Console.WriteLine("1. Chuyển đổi A=0...Z=25");
+            Console.WriteLine("2. Chuyển đổi ASCII");
+            Console.WriteLine("3. Chuyển đổi chữ số 0-9 ↔ A-J");
+            Console.WriteLine("4. Chuẩn hóa bản văn");
+            Console.WriteLine("5. Chữ ký số RSA từ văn bản");
+            Console.WriteLine("6. Máy tính công thức thi");
+            Console.WriteLine("7. Máy tính số nhanh / modulo");
+            Console.WriteLine("8. Bảng mã ký tự");
+            Console.WriteLine("9. Tạo bảng chữ cái thay thế đơn");
+            Console.WriteLine("0. Quay lại");
+            var choice = ConsoleInput.Integer("Chọn: ", 0, 9);
             if (choice == 0) return;
             ConsoleOutput.Guard(() => Execute(choice));
         }
@@ -50,37 +50,37 @@ public sealed class ExamUtilitiesMenu
     // ============================================================
     private static void A0Z25Menu()
     {
-        ConsoleOutput.Header("A=0..Z=25 CONVERSION");
-        Console.WriteLine("1. Character -> Number");
-        Console.WriteLine("2. Number -> Character");
-        Console.WriteLine("3. Text -> Number List");
-        Console.WriteLine("4. Number List -> Text");
-        var m = ConsoleInput.Integer("Chon: ", 1, 4);
+        ConsoleOutput.Header("CHUYỂN ĐỔI A=0...Z=25");
+        Console.WriteLine("1. Ký tự -> Số");
+        Console.WriteLine("2. Số -> Ký tự");
+        Console.WriteLine("3. Bản văn -> Danh sách số");
+        Console.WriteLine("4. Danh sách số -> Bản văn");
+        var m = ConsoleInput.Integer("Chọn: ", 1, 4);
         switch (m)
         {
             case 1:
-                var c = ConsoleInput.Text("Character: ").ToUpperInvariant().Trim();
-                if (c.Length != 1) throw new ArgumentException("Nhap dung 1 ky tu.");
+                var c = ConsoleInput.Text("Ký tự: ").ToUpperInvariant().Trim();
+                if (c.Length != 1) throw new ArgumentException("Vui lòng nhập đúng 1 ký tự.");
                 var n1 = EncodingUtils.CharToA0Z25(c[0]);
-                Console.WriteLine($"\nCharacter : {c[0]}");
-                Console.WriteLine($"Value     : {n1}");
-                Console.WriteLine($"Formula   : '{c[0]}' - 'A' = {n1}");
+                Console.WriteLine($"\nKý tự     : {c[0]}");
+                Console.WriteLine($"Giá trị   : {n1}");
+                Console.WriteLine($"Công thức : '{c[0]}' - 'A' = {n1}");
                 break;
             case 2:
-                var n2 = ConsoleInput.Integer("Number (0-25): ", 0, 25);
+                var n2 = ConsoleInput.Integer("Số (0-25): ", 0, 25);
                 Console.WriteLine($"\n{n2} -> {EncodingUtils.A0Z25ToChar(n2)}");
                 break;
             case 3:
-                var text3 = ConsoleInput.Text("Text (letters only): ").ToUpperInvariant().Trim();
+                var text3 = ConsoleInput.Text("Bản văn (chỉ chữ cái): ").ToUpperInvariant().Trim();
                 var vals3 = EncodingUtils.TextToA0Z25(text3);
-                Console.WriteLine($"\nText:\n{text3}\n\nA=0..Z=25:\n[{string.Join(",", vals3)}]");
-                Console.WriteLine($"\n{"Char",-6} | {"Value",-5}");
+                Console.WriteLine($"\nBản văn:\n{text3}\n\nA=0..Z=25:\n[{string.Join(",", vals3)}]");
+                Console.WriteLine($"\n{"Ký tự",-6} | {"Giá trị",-5}");
                 Console.WriteLine(new string('-', 16));
                 for (var i = 0; i < text3.Length; i++)
                     Console.WriteLine($"{text3[i],-6} | {vals3[i],-5}");
                 break;
             case 4:
-                var input4 = ConsoleInput.Text("Number list (comma/space separated): ");
+                var input4 = ConsoleInput.Text("Danh sách số (phân cách bằng dấu phẩy/khoảng trắng): ");
                 var nums4 = EncodingUtils.ParseIntList(input4);
                 Console.WriteLine($"\n[{string.Join(",", nums4)}] -> {EncodingUtils.A0Z25ToText(nums4)}");
                 break;
@@ -92,57 +92,57 @@ public sealed class ExamUtilitiesMenu
     // ============================================================
     private static void AsciiMenu()
     {
-        ConsoleOutput.Header("ASCII CONVERSION");
-        Console.WriteLine("1. Character -> Decimal");
-        Console.WriteLine("2. Decimal -> Character");
-        Console.WriteLine("3. Text -> ASCII Decimal List");
-        Console.WriteLine("4. ASCII Decimal List -> Text");
-        Console.WriteLine("5. Decimal -> Binary (8-bit)");
-        Console.WriteLine("6. Decimal -> Hex");
-        Console.WriteLine("7. Character -> Full Info (Dec/Bin/Hex)");
-        var m = ConsoleInput.Integer("Chon: ", 1, 7);
+        ConsoleOutput.Header("CHUYỂN ĐỔI ASCII");
+        Console.WriteLine("1. Ký tự -> Thập phân");
+        Console.WriteLine("2. Thập phân -> Ký tự");
+        Console.WriteLine("3. Bản văn -> Danh sách số thập phân ASCII");
+        Console.WriteLine("4. Danh sách số thập phân ASCII -> Bản văn");
+        Console.WriteLine("5. Thập phân -> Nhị phân (8 bit)");
+        Console.WriteLine("6. Thập phân -> Hex");
+        Console.WriteLine("7. Ký tự -> Đầy đủ thông tin (Thập phân/Nhị phân/Hex)");
+        var m = ConsoleInput.Integer("Chọn: ", 1, 7);
         switch (m)
         {
             case 1:
-                var c1 = ConsoleInput.Text("Character: ").Trim();
-                if (c1.Length != 1) throw new ArgumentException("Nhap dung 1 ky tu.");
+                var c1 = ConsoleInput.Text("Ký tự: ").Trim();
+                if (c1.Length != 1) throw new ArgumentException("Vui lòng nhập đúng 1 ký tự.");
                 Console.WriteLine($"\n{c1[0]} -> ASCII {EncodingUtils.CharToAscii(c1[0])}");
                 break;
             case 2:
-                var d2 = ConsoleInput.Integer("ASCII Decimal: ", 0, 127);
+                var d2 = ConsoleInput.Integer("ASCII thập phân: ", 0, 127);
                 Console.WriteLine($"\n{d2} -> '{EncodingUtils.AsciiToChar(d2)}'");
                 break;
             case 3:
-                var t3 = ConsoleInput.Text("Text: ");
+                var t3 = ConsoleInput.Text("Bản văn: ");
                 var a3 = EncodingUtils.TextToAsciiList(t3);
                 Console.WriteLine($"\n[{string.Join(", ", a3)}]");
-                Console.WriteLine($"\n{"Char",-6} | {"ASCII",-5}");
+                Console.WriteLine($"\n{"Ký tự",-6} | {"ASCII",-5}");
                 Console.WriteLine(new string('-', 16));
                 for (var i = 0; i < t3.Length; i++)
                     Console.WriteLine($"{t3[i],-6} | {a3[i],-5}");
                 break;
             case 4:
-                var input4 = ConsoleInput.Text("ASCII list (comma/space separated): ");
+                var input4 = ConsoleInput.Text("Danh sách ASCII (phân cách bằng dấu phẩy/khoảng trắng): ");
                 var nums4 = EncodingUtils.ParseIntList(input4);
                 Console.WriteLine($"\n{EncodingUtils.AsciiListToText(nums4)}");
                 break;
             case 5:
-                var d5 = ConsoleInput.Integer("ASCII Decimal: ", 0, 255);
+                var d5 = ConsoleInput.Integer("ASCII thập phân: ", 0, 255);
                 Console.WriteLine($"\n{d5} = {EncodingUtils.AsciiToBinary(d5)}");
                 break;
             case 6:
-                var d6 = ConsoleInput.Integer("ASCII Decimal: ", 0, 255);
+                var d6 = ConsoleInput.Integer("ASCII thập phân: ", 0, 255);
                 Console.WriteLine($"\n{d6} = 0x{EncodingUtils.AsciiToHex(d6)}");
                 break;
             case 7:
-                var c7 = ConsoleInput.Text("Character: ").Trim();
-                if (c7.Length != 1) throw new ArgumentException("Nhap dung 1 ky tu.");
+                var c7 = ConsoleInput.Text("Ký tự: ").Trim();
+                if (c7.Length != 1) throw new ArgumentException("Vui lòng nhập đúng 1 ký tự.");
                 var code7 = EncodingUtils.CharToAscii(c7[0]);
-                Console.WriteLine($"\nCharacter  : {c7[0]}");
-                Console.WriteLine($"ASCII dec  : {code7}");
-                Console.WriteLine($"ASCII bin  : {EncodingUtils.AsciiToBinary(code7)}");
-                Console.WriteLine($"ASCII hex  : 0x{EncodingUtils.AsciiToHex(code7)}");
-                Console.WriteLine($"A=0..Z=25  : {(c7[0] >= 'A' && c7[0] <= 'Z' ? EncodingUtils.CharToA0Z25(char.ToUpperInvariant(c7[0])).ToString() : "N/A (khong phai A-Z)")}");
+                Console.WriteLine($"\nKý tự      : {c7[0]}");
+                Console.WriteLine($"ASCII thập phân: {code7}");
+                Console.WriteLine($"ASCII nhị phân : {EncodingUtils.AsciiToBinary(code7)}");
+                Console.WriteLine($"ASCII hex      : 0x{EncodingUtils.AsciiToHex(code7)}");
+                Console.WriteLine($"A=0..Z=25      : {(c7[0] >= 'A' && c7[0] <= 'Z' ? EncodingUtils.CharToA0Z25(char.ToUpperInvariant(c7[0])).ToString() : "Không áp dụng (không phải A-Z)")}");
                 break;
         }
     }
@@ -152,17 +152,17 @@ public sealed class ExamUtilitiesMenu
     // ============================================================
     private static void DigitLetterMenu()
     {
-        ConsoleOutput.Header("DIGIT 0-9 <-> LETTER A-J");
-        Console.WriteLine("Quy uoc: 0->A, 1->B, 2->C, ..., 9->J");
-        Console.WriteLine("1. Digit string -> Letters (e.g. 2006 -> CAAG)");
-        Console.WriteLine("2. Letters A-J -> Digit string (e.g. CAAG -> 2006)");
-        Console.WriteLine("3. Single digit -> Letter");
-        Console.WriteLine("4. Single Letter A-J -> Digit");
-        var m = ConsoleInput.Integer("Chon: ", 1, 4);
+        ConsoleOutput.Header("CHUYỂN ĐỔI CHỮ SỐ 0-9 ↔ CHỮ CÁI A-J");
+        Console.WriteLine("Quy ước: 0->A, 1->B, 2->C, ..., 9->J");
+        Console.WriteLine("1. Chuỗi chữ số -> Chữ cái (ví dụ: 2006 -> CAAG)");
+        Console.WriteLine("2. Chữ cái A-J -> Chuỗi chữ số (ví dụ: CAAG -> 2006)");
+        Console.WriteLine("3. Một chữ số -> Chữ cái");
+        Console.WriteLine("4. Một chữ cái A-J -> Chữ số");
+        var m = ConsoleInput.Integer("Chọn: ", 1, 4);
         switch (m)
         {
             case 1:
-                var digits = ConsoleInput.Text("Digit string: ").Trim();
+                var digits = ConsoleInput.Text("Chuỗi chữ số: ").Trim();
                 var letters = EncodingUtils.DigitStringToLetters(digits);
                 Console.WriteLine($"\n{digits} -> {letters}");
                 Console.WriteLine();
@@ -170,18 +170,18 @@ public sealed class ExamUtilitiesMenu
                     Console.WriteLine($"  {digits[i]} -> {letters[i]}");
                 break;
             case 2:
-                var lstr = ConsoleInput.Text("Letter string (A-J only): ").ToUpperInvariant().Trim();
+                var lstr = ConsoleInput.Text("Chuỗi chữ cái (chỉ A-J): ").ToUpperInvariant().Trim();
                 var dstr = EncodingUtils.LettersToDigitString(lstr);
                 Console.WriteLine($"\n{lstr} -> {dstr}");
                 break;
             case 3:
-                var d3 = ConsoleInput.Text("Digit (0-9): ").Trim();
-                if (d3.Length != 1 || !char.IsDigit(d3[0])) throw new ArgumentException("Nhap dung 1 chu so.");
+                var d3 = ConsoleInput.Text("Chữ số (0-9): ").Trim();
+                if (d3.Length != 1 || !char.IsDigit(d3[0])) throw new ArgumentException("Vui lòng nhập đúng 1 chữ số.");
                 Console.WriteLine($"\n{d3[0]} -> {EncodingUtils.DigitToLetter(d3[0])}");
                 break;
             case 4:
-                var l4 = ConsoleInput.Text("Letter (A-J): ").ToUpperInvariant().Trim();
-                if (l4.Length != 1) throw new ArgumentException("Nhap dung 1 chu cai.");
+                var l4 = ConsoleInput.Text("Chữ cái (A-J): ").ToUpperInvariant().Trim();
+                if (l4.Length != 1) throw new ArgumentException("Vui lòng nhập đúng 1 chữ cái.");
                 Console.WriteLine($"\n{l4[0]} -> {EncodingUtils.LetterToDigit(l4[0])}");
                 break;
         }
@@ -192,26 +192,26 @@ public sealed class ExamUtilitiesMenu
     // ============================================================
     private static void NormMenu()
     {
-        ConsoleOutput.Header("TEXT NORMALIZATION FOR CLASSICAL CIPHER");
-        var input = ConsoleInput.Text("Input text: ");
+        ConsoleOutput.Header("CHUẨN HÓA BẢN VĂN CHO MẬT MÃ CỔ ĐIỂN");
+        var input = ConsoleInput.Text("Bản văn cần chuẩn hóa: ");
         Console.WriteLine("\n1. Letters only (bo so va ky tu dac biet)");
-        Console.WriteLine("2. Preserve digits (giu A-Z va 0-9)");
-        Console.WriteLine("3. Convert digits 0-9 -> A-J");
-        Console.WriteLine("4. Show all modes");
-        var m = ConsoleInput.Integer("Chon: ", 1, 4);
+        Console.WriteLine("2. Giữ chữ số (giữ A-Z và 0-9)");
+        Console.WriteLine("3. Chuyển chữ số 0-9 -> A-J");
+        Console.WriteLine("4. Hiển thị tất cả chế độ");
+        var m = ConsoleInput.Integer("Chọn: ", 1, 4);
         if (m == 4)
         {
             var r1 = EncodingUtils.NormalizeText(input, EncodingUtils.NormMode.LettersOnly);
             var r2 = EncodingUtils.NormalizeText(input, EncodingUtils.NormMode.PreserveDigits);
             var r3 = EncodingUtils.NormalizeText(input, EncodingUtils.NormMode.DigitsToLetters);
             Console.WriteLine($"\nMode 1 (Letters only)       : {r1}");
-            Console.WriteLine($"Mode 2 (Preserve digits)    : {r2}");
-            Console.WriteLine($"Mode 3 (Digits -> A-J)      : {r3}");
+            Console.WriteLine($"Chế độ 2 (Giữ chữ số)            : {r2}");
+            Console.WriteLine($"Chế độ 3 (Chữ số -> A-J)         : {r3}");
         }
         else
         {
             var mode = m switch { 1 => EncodingUtils.NormMode.LettersOnly, 2 => EncodingUtils.NormMode.PreserveDigits, _ => EncodingUtils.NormMode.DigitsToLetters };
-            ConsoleOutput.Result("Result", EncodingUtils.NormalizeText(input, mode));
+            ConsoleOutput.Result("Kết quả", EncodingUtils.NormalizeText(input, mode));
         }
     }
 
@@ -220,13 +220,13 @@ public sealed class ExamUtilitiesMenu
     // ============================================================
     private static void RsaTextMenu()
     {
-        ConsoleOutput.Header("RSA DIGITAL SIGNATURE FROM TEXT");
-        Console.WriteLine("1. Sign Text (UEH Mode: S = M^eA mod n)");
-        Console.WriteLine("2. Verify Signatures");
-        Console.WriteLine("3. Full Walkthrough (Text + Keys + Sign + Verify)");
-        Console.WriteLine("4. Find nearby primes (birthday helper)");
-        Console.WriteLine("5. Find valid e for phi");
-        var m = ConsoleInput.Integer("Chon: ", 1, 5);
+        ConsoleOutput.Header("CHỮ KÝ SỐ RSA TỪ VĂN BẢN");
+        Console.WriteLine("1. Ký văn bản (chế độ UEH: S = M^eA mod n)");
+        Console.WriteLine("2. Xác thực chữ ký");
+        Console.WriteLine("3. Toàn bộ quy trình (văn bản + khóa + ký + xác thực)");
+        Console.WriteLine("4. Tìm số nguyên tố gần ngày sinh");
+        Console.WriteLine("5. Tìm e hợp lệ theo φ");
+        var m = ConsoleInput.Integer("Chọn: ", 1, 5);
         switch (m)
         {
             case 1: RsaSignText(); break;
@@ -242,14 +242,14 @@ public sealed class ExamUtilitiesMenu
         var eA = ConsoleInput.BigInt("eA (signing/private in UEH mode) = ");
         var n = ConsoleInput.BigInt("n = ");
         Console.WriteLine("Encoding: 1.ASCII  2.A=0..Z=25");
-        var encChoice = ConsoleInput.Integer("Chon: ", 1, 2);
+        var encChoice = ConsoleInput.Integer("Chọn: ", 1, 2);
         var enc = encChoice == 1 ? RsaTextSignatureService.TextEncoding.Ascii : RsaTextSignatureService.TextEncoding.A0Z25;
         return (eA, n, enc);
     }
 
     private static void RsaSignText()
     {
-        var text = ConsoleInput.Text("Plaintext: ").ToUpperInvariant().Trim();
+        var text = ConsoleInput.Text("Bản rõ: ").ToUpperInvariant().Trim();
         var (eA, n, enc) = ReadRsaParams();
         var result = RsaTextSignatureService.SignText(text, eA, n, enc);
         Console.WriteLine($"\n[UEH SIGN MODE] S = M^{eA} mod {n}");
@@ -264,13 +264,13 @@ public sealed class ExamUtilitiesMenu
 
     private static void RsaVerifyText()
     {
-        var sigInput = ConsoleInput.Text("Signatures (comma/space): ");
+        var sigInput = ConsoleInput.Text("Danh sách chữ ký (phân cách bằng dấu phẩy/khoảng trắng): ");
         var sigs = EncodingUtils.ParseIntList(sigInput).Select(x => (BigInteger)x).ToArray();
         var dA = ConsoleInput.BigInt("dA (verifying/public in UEH mode) = ");
         var n = ConsoleInput.BigInt("n = ");
         Console.WriteLine("Encoding: 1.ASCII  2.A=0..Z=25");
-        var enc = ConsoleInput.Integer("Chon: ", 1, 2) == 1 ? RsaTextSignatureService.TextEncoding.Ascii : RsaTextSignatureService.TextEncoding.A0Z25;
-        var origText = ConsoleInput.Text("Original text (Enter = skip): ", true).ToUpperInvariant().Trim();
+        var enc = ConsoleInput.Integer("Chọn: ", 1, 2) == 1 ? RsaTextSignatureService.TextEncoding.Ascii : RsaTextSignatureService.TextEncoding.A0Z25;
+        var origText = ConsoleInput.Text("Bản văn gốc (Enter = bỏ qua): ", true).ToUpperInvariant().Trim();
         var result = RsaTextSignatureService.VerifyText(sigs, dA, n, enc, origText.Length > 0 ? origText : null);
         Console.WriteLine($"\n[UEH VERIFY MODE] M' = S^{dA} mod {n}\n");
         Console.WriteLine($"{"#",-4} | {"S",-6} | {"M'",-6} | Char");
@@ -285,13 +285,13 @@ public sealed class ExamUtilitiesMenu
     private static void RsaFullWalkthrough()
     {
         Console.WriteLine("\n--- STEP 1: TEXT ---");
-        var text = ConsoleInput.Text("Plaintext: ").ToUpperInvariant().Trim();
+        var text = ConsoleInput.Text("Bản rõ: ").ToUpperInvariant().Trim();
         Console.WriteLine("\n--- STEP 2: RSA PARAMETERS ---");
         var p = ConsoleInput.BigInt("p = ");
         var q = ConsoleInput.BigInt("q = ");
         var eA = ConsoleInput.BigInt("eA (signing/private) = ");
         Console.WriteLine("Encoding: 1.ASCII  2.A=0..Z=25");
-        var enc = ConsoleInput.Integer("Chon: ", 1, 2) == 1 ? RsaTextSignatureService.TextEncoding.Ascii : RsaTextSignatureService.TextEncoding.A0Z25;
+        var enc = ConsoleInput.Integer("Chọn: ", 1, 2) == 1 ? RsaTextSignatureService.TextEncoding.Ascii : RsaTextSignatureService.TextEncoding.A0Z25;
 
         var keys = RsaService.CalculateKeys(p, q, eA);
         Console.WriteLine($"\n--- STEP 3: KEY GENERATION ---");
@@ -330,12 +330,12 @@ public sealed class ExamUtilitiesMenu
 
     private static void BirthdayPrimes()
     {
-        var n = ConsoleInput.BigInt("Birthday number (e.g. day = 15): ");
+        var n = ConsoleInput.BigInt("Số ngày sinh (ví dụ: ngày = 15): ");
         var (prev, _, next, nIsPrime) = RsaTextSignatureService.FindNearbyPrimes(n);
         Console.WriteLine();
         if (nIsPrime) Console.WriteLine($"{n} itself is PRIME.");
-        Console.WriteLine($"Previous prime = {prev?.ToString() ?? "N/A"}");
-        Console.WriteLine($"Next prime     = {next?.ToString() ?? "N/A"}");
+        Console.WriteLine($"Số nguyên tố liền trước = {prev?.ToString() ?? "Không có"}");
+        Console.WriteLine($"Số nguyên tố liền sau   = {next?.ToString() ?? "Không có"}");
         if (prev.HasValue && next.HasValue)
         {
             Console.WriteLine($"\nSuggested (prev < N < next):");
@@ -351,7 +351,7 @@ public sealed class ExamUtilitiesMenu
         Console.WriteLine($"\nValid e values for phi={phi}:");
         foreach (var e in candidates) Console.Write($"{e} ");
         Console.WriteLine();
-        var checkMode = ConsoleInput.YesNo("Check a specific e?");
+        var checkMode = ConsoleInput.YesNo("Kiểm tra một giá trị e cụ thể?");
         if (checkMode)
         {
             var eCheck = ConsoleInput.BigInt("e = ");
@@ -365,12 +365,12 @@ public sealed class ExamUtilitiesMenu
     // ============================================================
     private static void FormulaMenu()
     {
-        ConsoleOutput.Header("EXAM FORMULA CALCULATOR");
+        ConsoleOutput.Header("MÁY TÍNH CÔNG THỨC THI");
         Console.WriteLine("1. Caesar key: K = ((day * month) mod 26) + 1");
         Console.WriteLine("2. Rail Fence rails: (day mod 3) + 2");
         Console.WriteLine("3. a mod m");
         Console.WriteLine("4. (a * b) mod m");
-        var m = ConsoleInput.Integer("Chon: ", 1, 4);
+        var m = ConsoleInput.Integer("Chọn: ", 1, 4);
         switch (m)
         {
             case 1:
@@ -405,17 +405,17 @@ public sealed class ExamUtilitiesMenu
     // ============================================================
     private static void QuickCalcMenu()
     {
-        ConsoleOutput.Header("NUMBER / MODULO QUICK CALCULATORS");
+        ConsoleOutput.Header("MÁY TÍNH SỐ NHANH / MODULO");
         Console.WriteLine("1. a mod m");
         Console.WriteLine("2. (a*b) mod m");
-        Console.WriteLine("3. a^-1 mod m (Modular Inverse)");
-        Console.WriteLine("4. a^b mod m (ModPow)");
-        Console.WriteLine("5. GCD(a,b)");
-        Console.WriteLine("6. Extended Euclid");
-        Console.WriteLine("7. Check Prime");
-        Console.WriteLine("8. Euler phi from p,q");
-        Console.WriteLine("9. RSA n, phi, d from p,q,e");
-        var m = ConsoleInput.Integer("Chon: ", 1, 9);
+        Console.WriteLine("3. a^-1 mod m (Nghịch đảo modulo)");
+        Console.WriteLine("4. a^b mod m (Lũy thừa modulo)");
+        Console.WriteLine("5. UCLN (GCD)(a,b)");
+        Console.WriteLine("6. Euclid mở rộng");
+        Console.WriteLine("7. Kiểm tra số nguyên tố");
+        Console.WriteLine("8. Tính φ Euler từ p,q");
+        Console.WriteLine("9. Tính n, φ, d RSA từ p,q,e");
+        var m = ConsoleInput.Integer("Chọn: ", 1, 9);
         switch (m)
         {
             case 1:
@@ -431,7 +431,7 @@ public sealed class ExamUtilitiesMenu
                   if (euclid.Gcd == 1) Console.WriteLine($"\n{a}^-1 mod {mod} = {euclid.Inverse(mod)}");
                   else Console.WriteLine($"\nNO INVERSE: gcd({a},{mod}) = {euclid.Gcd}"); break; }
             case 4:
-                { var b = ConsoleInput.BigInt("Base = "); var exp = ConsoleInput.BigInt("Exponent = "); var mod = ConsoleInput.BigInt("Modulus = ");
+                { var b = ConsoleInput.BigInt("Cơ số = "); var exp = ConsoleInput.BigInt("Số mũ = "); var mod = ConsoleInput.BigInt("Modulo = ");
                   Console.WriteLine($"\n{b}^{exp} mod {mod} = {ModularArithmetic.ModPow(b, exp, mod)}"); break; }
             case 5:
                 { var a = ConsoleInput.BigInt("a = "); var b = ConsoleInput.BigInt("b = ");
@@ -439,14 +439,14 @@ public sealed class ExamUtilitiesMenu
             case 6:
                 { var a = ConsoleInput.BigInt("a = "); var mod = ConsoleInput.BigInt("m = ");
                   var res = ExtendedEuclidService.Solve(a, mod);
-                  Console.WriteLine("\nEuclid steps:");
+                  Console.WriteLine("\nCác bước Euclid:");
                   foreach (var s in res.Steps) Console.WriteLine($"  {s.Dividend} = {s.Quotient}*{s.Divisor} + {s.Remainder}");
-                  Console.WriteLine($"gcd = {res.Gcd}  x = {res.X}  y = {res.Y}");
+                  Console.WriteLine($"UCLN (GCD) = {res.Gcd}  x = {res.X}  y = {res.Y}");
                   if (res.Gcd == 1) Console.WriteLine($"{a}^-1 mod {mod} = {res.Inverse(mod)}");
-                  else Console.WriteLine($"NO INVERSE: gcd={res.Gcd}"); break; }
+                  else Console.WriteLine($"KHÔNG CÓ NGHỊCH ĐẢO: UCLN (GCD)={res.Gcd}"); break; }
             case 7:
                 { var n = ConsoleInput.BigInt("n = ");
-                  Console.WriteLine($"\n{n} is{(PrimeUtils.IsPrime(n) ? "" : " NOT")} prime."); break; }
+                  Console.WriteLine($"\n{n} {(PrimeUtils.IsPrime(n) ? "là số nguyên tố" : "không phải số nguyên tố")}."); break; }
             case 8:
                 { var p = ConsoleInput.BigInt("p = "); var q = ConsoleInput.BigInt("q = ");
                   Console.WriteLine($"\nphi({p}*{q}) = ({p}-1)*({q}-1) = {(p-1)*(q-1)}"); break; }
@@ -462,7 +462,7 @@ public sealed class ExamUtilitiesMenu
     // ============================================================
     private static void CharCodeTable()
     {
-        ConsoleOutput.Header("CHARACTER CODE TABLE");
+        ConsoleOutput.Header("BẢNG MÃ KÝ TỰ");
         Console.WriteLine($"{"Char",-5} | {"A0Z25",-5} | {"ASCII",-5} | {"Bin",-8} | {"Hex",-4}");
         Console.WriteLine(new string('-', 40));
         for (var c = 'A'; c <= 'Z'; c++)
@@ -480,9 +480,9 @@ public sealed class ExamUtilitiesMenu
     // ============================================================
     private static void MonoAlphaGen()
     {
-        ConsoleOutput.Header("MONOALPHABETIC ALPHABET GENERATOR");
+        ConsoleOutput.Header("TẠO BẢNG CHỮ CÁI THAY THẾ ĐƠN");
         Console.WriteLine("Quy tac: Uppercase -> Digit->Letter -> Remove dup -> Append Z..A\n");
-        var seed = ConsoleInput.Text("Seed (e.g. DAT1510): ");
+        var seed = ConsoleInput.Text("Chuỗi ban đầu (ví dụ: DAT1510): ");
         var (normalized, unique, final) = EncodingUtils.GenerateMonoAlphabet(seed);
         Console.WriteLine($"\nOriginal seed       : {seed.ToUpperInvariant()}");
         Console.WriteLine($"After digit->letter : {normalized}");
@@ -494,14 +494,14 @@ public sealed class ExamUtilitiesMenu
             Console.Write($"{(char)('A' + i)}->{final[i]}  ");
         Console.WriteLine();
         Console.WriteLine("\nPlayfair key normalization helper:");
-        var pfKey = ConsoleInput.Text("Playfair key (Enter = skip): ", true).Trim();
+        var pfKey = ConsoleInput.Text("Khóa Playfair (Enter = bỏ qua): ", true).Trim();
         if (pfKey.Length > 0)
         {
             var pf = EncodingUtils.NormalizePlayfairKey(pfKey);
             Console.WriteLine($"Normalized Playfair key: {pf}");
         }
         Console.WriteLine("\nVigenere key normalization helper:");
-        var vKey = ConsoleInput.Text("Vigenere key (Enter = skip): ", true).Trim();
+        var vKey = ConsoleInput.Text("Khóa Vigenère (Enter = bỏ qua): ", true).Trim();
         if (vKey.Length > 0)
         {
             var vn = EncodingUtils.NormalizeVigenereKey(vKey);

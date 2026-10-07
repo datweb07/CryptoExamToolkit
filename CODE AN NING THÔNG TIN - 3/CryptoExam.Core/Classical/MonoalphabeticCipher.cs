@@ -22,7 +22,7 @@ public sealed class MonoalphabeticCipher
     {
         var value = TextUtils.LettersOnly(alphabet);
         if (value.Length != 26 || value.Distinct().Count() != 26)
-            throw new ArgumentException("Alphabet phải gồm đúng 26 chữ A-Z không trùng.", name);
+            throw new ArgumentException("Bảng chữ cái phải gồm đúng 26 chữ A-Z, không trùng.", name);
         return value;
     }
 

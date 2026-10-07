@@ -25,7 +25,7 @@ public static class ConsoleOutput
         catch (Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"ERROR: {ex.Message}");
+            Console.WriteLine($"LỖI: {ex.Message}");
             Console.ResetColor();
         }
         Pause();

@@ -40,7 +40,7 @@ public sealed class PlayfairCipher
     public string Decrypt(string ciphertext)
     {
         var text = TextUtils.LettersOnly(ciphertext, true);
-        if (text.Length % 2 != 0) throw new ArgumentException("Ciphertext Playfair phải có độ dài chẵn.");
+        if (text.Length % 2 != 0) throw new ArgumentException("Bản mã Playfair phải có độ dài chẵn.");
         return string.Concat(Enumerable.Range(0, text.Length / 2).Select(i => TransformPair(text.Substring(i * 2, 2), -1)));
     }
     public string EncryptPair(string pair) => TransformPair(pair, 1);
@@ -49,7 +49,7 @@ public sealed class PlayfairCipher
     private string TransformPair(string pair, int direction)
     {
         var value = TextUtils.LettersOnly(pair, true);
-        if (value.Length != 2) throw new ArgumentException("Cặp Playfair phải gồm đúng 2 chữ cái.");
+        if (value.Length != 2) throw new ArgumentException("Cặp ký tự Playfair phải gồm đúng 2 chữ cái.");
         var a = _positions[value[0]];
         var b = _positions[value[1]];
         if (a.Row == b.Row)

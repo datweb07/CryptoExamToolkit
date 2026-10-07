@@ -12,7 +12,7 @@ public static class OneTimePadCipher
         var message = TextUtils.LettersOnly(text);
         var normalizedKey = TextUtils.LettersOnly(key);
         if (message.Length != normalizedKey.Length)
-            throw new ArgumentException("OTP yêu cầu key có cùng số chữ cái với message; key không được lặp.");
+            throw new ArgumentException("OTP yêu cầu khóa có cùng số chữ cái với bản tin; không được lặp khóa.");
         return string.Concat(message.Select((c, i) => (char)('A' + TextUtils.Mod(c - 'A' + direction * (normalizedKey[i] - 'A'), 26))));
     }
 }

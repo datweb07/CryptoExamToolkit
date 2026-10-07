@@ -48,8 +48,8 @@ public static class ConsoleInput
         while (true)
         {
             var value = Text(label + " (Y/N): ").ToUpperInvariant();
-            if (value is "Y" or "YES" or "C" or "CO") return true;
-            if (value is "N" or "NO" or "K" or "KHONG") return false;
+            if (value is "Y" or "CÓ" or "C" or "CO") return true;
+            if (value is "N" or "KHÔNG" or "K" or "KHONG") return false;
             Error("Nhập Y hoặc N.");
         }
     }
@@ -67,7 +67,7 @@ public static class ConsoleInput
     private static void Error(string message)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("[INPUT ERROR] " + message);
+        Console.WriteLine("[LỖI NHẬP LIỆU] " + message);
         Console.ResetColor();
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using CryptoExam.Core.NumberTheory;
 
 namespace CryptoExam.Core.RSA;

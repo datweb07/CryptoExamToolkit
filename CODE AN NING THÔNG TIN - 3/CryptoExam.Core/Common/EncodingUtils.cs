@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 
 namespace CryptoExam.Core.Common;
 
@@ -196,7 +196,7 @@ public static class EncodingUtils
             if (!seen.Contains(c)) remaining.Append(c);
         }
         var final = unique + remaining.ToString();
-        if (final.Length != 26) throw new Exception("Loi logic: alphabet khong du 26 ky tu.");
+        if (final.Length != 26) throw new Exception("Lỗi logic: bảng chữ cái không đủ 26 ký tự.");
         return (normalized, unique, final);
     }
 

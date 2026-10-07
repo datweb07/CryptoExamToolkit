@@ -9,7 +9,7 @@ public static class VigenereCipher
     {
         var letters = TextUtils.LettersOnly(text);
         var normalizedKey = TextUtils.LettersOnly(key);
-        if (normalizedKey.Length == 0) throw new ArgumentException("Key phải có ít nhất một chữ cái.");
+        if (normalizedKey.Length == 0) throw new ArgumentException("Khóa phải có ít nhất một chữ cái.");
         return string.Concat(Enumerable.Range(0, letters.Length).Select(i => normalizedKey[i % normalizedKey.Length]));
     }
 
@@ -19,7 +19,7 @@ public static class VigenereCipher
     private static string Transform(string text, string key, int direction, bool preserveSpaces)
     {
         var normalizedKey = TextUtils.LettersOnly(key);
-        if (normalizedKey.Length == 0) throw new ArgumentException("Key phải có ít nhất một chữ cái.");
+        if (normalizedKey.Length == 0) throw new ArgumentException("Khóa phải có ít nhất một chữ cái.");
         var result = new StringBuilder();
         var keyIndex = 0;
         foreach (var c in text.ToUpperInvariant())

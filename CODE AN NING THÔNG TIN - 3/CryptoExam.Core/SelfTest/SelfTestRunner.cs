@@ -1,4 +1,4 @@
-﻿using CryptoExam.Core.AES;
+using CryptoExam.Core.AES;
 using CryptoExam.Core.Classical;
 using CryptoExam.Core.DES;
 using CryptoExam.Core.NumberTheory;

@@ -1,4 +1,4 @@
-﻿using CryptoExam.ConsoleApp.Helpers;
+using CryptoExam.ConsoleApp.Helpers;
 
 namespace CryptoExam.ConsoleApp.Menus;
 
@@ -8,17 +8,17 @@ public sealed class MainMenu
     {
         while (true)
         {
-            ConsoleOutput.Header("CRYPTO EXAM TOOLKIT (.NET 8)");
-            Console.WriteLine("1. Classical Cryptography");
-            Console.WriteLine("2. DES (Educational + Quick Query)");
+            ConsoleOutput.Header("BỘ CÔNG CỤ ÔN THI MẬT MÃ (.NET 8)");
+            Console.WriteLine("1. Mật mã cổ điển");
+            Console.WriteLine("2. DES (Học thuật + Tra cứu nhanh)");
             Console.WriteLine("3. AES");
-            Console.WriteLine("4. RSA / Digital Signature");
-            Console.WriteLine("5. Number Theory / Euclid / Modulo");
+            Console.WriteLine("4. RSA / Chữ ký số");
+            Console.WriteLine("5. Lý thuyết số / Euclid / Modulo");
             Console.WriteLine("6. Double DES / Triple DES");
-            Console.WriteLine("7. Run Self-Test");
-            Console.WriteLine("8. Exam Utilities / Conversion & Calculators");
-            Console.WriteLine("0. Exit");
-            switch (ConsoleInput.Integer("Chon: ", 0, 8))
+            Console.WriteLine("7. Chạy tự kiểm tra");
+            Console.WriteLine("8. Tiện ích thi / Chuyển đổi và máy tính");
+            Console.WriteLine("0. Thoát");
+            switch (ConsoleInput.Integer("Chọn: ", 0, 8))
             {
                 case 1: new ClassicalMenu().Run(); break;
                 case 2: new DesMenu().Run(); break;

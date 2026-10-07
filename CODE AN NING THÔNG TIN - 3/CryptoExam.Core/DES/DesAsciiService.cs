@@ -14,7 +14,7 @@ public static class DesAsciiService
         var remainder = bytes.Length % 8;
         if (remainder != 0 || padding == DesPaddingMode.Pkcs7)
         {
-            if (padding == DesPaddingMode.None) throw new ArgumentException("Text phải đủ block 8 byte hoặc chọn padding.");
+            if (padding == DesPaddingMode.None) throw new ArgumentException("Bản văn phải đủ khối 8 byte hoặc cần chọn kiểu đệm.");
             var paddingLength = remainder == 0 ? 8 : 8 - remainder;
             Array.Resize(ref bytes, bytes.Length + paddingLength);
             if (padding == DesPaddingMode.Pkcs7) Array.Fill(bytes, (byte)paddingLength, bytes.Length - paddingLength, paddingLength);
@@ -29,7 +29,7 @@ public static class DesAsciiService
     public static DesAsciiDecryptResult Decrypt(string ciphertextHex, string keyHex, DesPaddingMode padding)
     {
         var normalized = Common.HexUtils.Normalize(ciphertextHex);
-        if (normalized.Length % 16 != 0) throw new ArgumentException("Ciphertext phải gồm các block 16 ký tự hex.");
+        if (normalized.Length % 16 != 0) throw new ArgumentException("Bản mã phải gồm các khối 16 ký tự hex.");
         var blocks = Enumerable.Range(0, normalized.Length / 16).Select(i =>
         {
             var input = normalized.Substring(i * 16, 16);
@@ -40,7 +40,7 @@ public static class DesAsciiService
         else if (padding == DesPaddingMode.Pkcs7 && bytes.Length > 0)
         {
             var count = bytes[^1];
-            if (count is < 1 or > 8 || bytes.TakeLast(count).Any(value => value != count)) throw new InvalidOperationException("PKCS#7 padding không hợp lệ.");
+            if (count is < 1 or > 8 || bytes.TakeLast(count).Any(value => value != count)) throw new InvalidOperationException("Kiểu đệm PKCS#7 không hợp lệ.");
             Array.Resize(ref bytes, bytes.Length - count);
         }
         return new(blocks, Encoding.ASCII.GetString(bytes));

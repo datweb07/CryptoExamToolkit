@@ -40,7 +40,7 @@ public static class RailFenceCipher
 
     private static void Validate(string text, int rails)
     {
-        if (rails < 2) throw new ArgumentOutOfRangeException(nameof(rails), "Số rail phải >= 2.");
-        if (rails > text.Length && text.Length > 0) throw new ArgumentOutOfRangeException(nameof(rails), "Số rail không được lớn hơn độ dài text.");
+        if (rails < 2) throw new ArgumentOutOfRangeException(nameof(rails), "Số hàng phải >= 2.");
+        if (rails > text.Length && text.Length > 0) throw new ArgumentOutOfRangeException(nameof(rails), "Số hàng không được lớn hơn độ dài bản văn.");
     }
 }

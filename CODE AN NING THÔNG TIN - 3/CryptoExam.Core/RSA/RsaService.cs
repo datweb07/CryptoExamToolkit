@@ -7,11 +7,11 @@ public static class RsaService
 {
     public static RsaKeyPair CalculateKeys(BigInteger p, BigInteger q, BigInteger e)
     {
-        if (p <= 1 || q <= 1) throw new ArgumentOutOfRangeException("p/q phải > 1.");
+        if (p <= 1 || q <= 1) throw new ArgumentOutOfRangeException("p và q phải lớn hơn 1.");
         var n = p * q;
         var phi = (p - 1) * (q - 1);
         var gcd = BigInteger.GreatestCommonDivisor(e, phi);
-        if (gcd != 1) throw new InvalidOperationException($"e không khả nghịch: gcd(e, phi) = {gcd}");
+        if (gcd != 1) throw new InvalidOperationException($"e không khả nghịch modulo φ: UCLN (GCD)(e, φ) = {gcd}");
         return new(p, q, n, phi, e, ExtendedEuclidService.ModularInverse(e, phi), gcd);
     }
 

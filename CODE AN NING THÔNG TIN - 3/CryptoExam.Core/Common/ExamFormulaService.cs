@@ -1,4 +1,4 @@
-﻿namespace CryptoExam.Core.Common;
+namespace CryptoExam.Core.Common;
 
 /// <summary>
 /// Cong thuc tinh khoa nhanh theo ngay sinh dung trong de thi.
@@ -27,14 +27,14 @@ public static class ExamFormulaService
     /// <summary>Tinh a mod m</summary>
     public static long SimpleMod(long a, long m)
     {
-        if (m <= 0) throw new ArgumentException("m phai > 0");
+        if (m <= 0) throw new ArgumentException("m phải > 0");
         return ((a % m) + m) % m;
     }
 
     /// <summary>Tinh (a * b) mod m</summary>
     public static long MulMod(long a, long b, long m)
     {
-        if (m <= 0) throw new ArgumentException("m phai > 0");
+        if (m <= 0) throw new ArgumentException("m phải > 0");
         return (long)(((long)a % m * ((long)b % m)) % m + m) % m;
     }
 }

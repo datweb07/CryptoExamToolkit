@@ -33,7 +33,7 @@ public static class ExtendedEuclidService
     {
         if (modulus <= 1) throw new ArgumentOutOfRangeException(nameof(modulus), "Modulus phải > 1.");
         var result = Solve(value, modulus);
-        if (result.Gcd != 1) throw new InvalidOperationException($"NO MODULAR INVERSE because gcd({value},{modulus}) = {result.Gcd}");
+        if (result.Gcd != 1) throw new InvalidOperationException($"KHÔNG CÓ NGHỊCH ĐẢO MODULO vì UCLN (GCD)({value},{modulus}) = {result.Gcd}");
         return ModularArithmetic.Normalize(result.X, modulus);
     }
 }
