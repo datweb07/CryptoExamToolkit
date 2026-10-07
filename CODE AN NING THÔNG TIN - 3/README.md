@@ -133,3 +133,18 @@ CryptoExam.SelfTest/
 - AES-128 FIPS `P=00112233445566778899AABBCCDDEEFF`, `K=000102030405060708090A0B0C0D0E0F` → `69C4E0D86A7B0430D8CDB78070B4C55A`.
 - Playfair `BALLOON`, key `MONARCHY` → `IBSUPMNA`.
 - RSA UEH `p=13`, `q=17`, `eA=7`, `dA=55`: `64 → 38 → 64`.
+
+## ThĂªm vĂ o Cheat sheet menu (Exam Utilities):
+
+| Ä á»  há» i | Ä Æ°á» ng dáº«n menu |
+|---|---|
+| Ä á»  há» i ASCII T | 8 Exam Utilities -> 2. ASCII Conversion -> 1. Character -> Decimal |
+| Ä á»  há» i 84 lĂ  chá»¯ gĂ¬ | 8 Exam Utilities -> 2. ASCII Conversion -> 2. Decimal -> Character |
+| Ä á»  há» i T theo A=0 | 8 Exam Utilities -> 1. A=0..Z=25 Conversion -> 1. Character -> Number |
+| Ä á»  há» i 19 lĂ  chá»¯ gĂ¬ theo A=0 | 8 Exam Utilities -> 1. A=0..Z=25 Conversion -> 2. Number -> Character |
+| Ä á»  há» i 2006 -> ? | 8 Exam Utilities -> 3. Digit 0-9 <-> A-J Conversion -> 1. Digit string -> Letters |
+| Ä á»  há» i TRUONGTHANHDAT -> ASCII | 8 Exam Utilities -> 2. ASCII Conversion -> 3. Text -> ASCII Decimal List |
+| Ä á»  há» i kĂ½ RSA cho há»  tĂªn | 8 Exam Utilities -> 5. RSA Digital Signature from Text hoáº·c 4 RSA |
+| Ä á»  há» i d | 5 Number Theory -> 6. Extended Euclid hoáº·c 4 RSA -> Calculate Keys hoáº·c 8 Exam Utilities -> 7. Number Quick Calculator -> 9. RSA n, phi, d |
+| Ä á»  há» i K Caesar | 8 Exam Utilities -> 6. Exam Formula Calculator -> 1. Caesar key |
+
